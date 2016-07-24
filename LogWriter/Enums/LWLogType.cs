@@ -4,26 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NV.LogWriter.Enums
+namespace LogWriter.Enums
 {
-
     /// <summary>
-    /// Define which log mode to use
+    /// Define which log type to use
     /// </summary>
-    public enum LWLogMode
+    public enum LWLogType
     {
         /// <summary>
-        /// Only log in eventview
+        /// Log only important logs
         /// </summary>
-        EventView,
+        Release,
         /// <summary>
-        /// Only log in a file
+        /// Log debug logs
         /// </summary>
-        File,
+        Debug,
         /// <summary>
-        /// Log in eventview and file
+        /// Log everything
         /// </summary>
-        EventViewAndFile
+        All
     }
-
 }

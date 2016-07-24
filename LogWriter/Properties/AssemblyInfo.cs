@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NV.LogWriter")]
+[assembly: AssemblyTitle("LogWriter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NV.LogWriter")]
+[assembly: AssemblyProduct("LogWriter")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a8975adc-d2cc-465f-8867-88410ca2a31c")]
+[assembly: Guid("557a2ea5-9875-4a0b-9451-febc83945b0d")]
 
 // Version information for an assembly consists of the following four values:
 //

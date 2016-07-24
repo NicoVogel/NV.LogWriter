@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
-using NV.LogWriter.Exceptions;
-using NV.LogWriter.Intrfaces;
-using NV.LogWriter.Properties;
+using LogWriter.Exceptions;
+using LogWriter.Intrfaces;
+using LogWriter.Properties;
 
-namespace NV.LogWriter.Writer
+namespace LogWriter.Writer
 {
     /// <summary>
     /// Create a multiple log line of a <see cref="ILWLogData"/>.

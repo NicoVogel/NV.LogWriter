@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A8975ADC-D2CC-465F-8867-88410CA2A31C}</ProjectGuid>
+    <ProjectGuid>{557A2EA5-9875-4A0B-9451-FEBC83945B0D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NV.LogWriter</RootNamespace>
-    <AssemblyName>NV.LogWriter</AssemblyName>
+    <RootNamespace>LogWriter</RootNamespace>
+    <AssemblyName>LogWriter</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\LogWriter.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NV.FileParser">
-      <HintPath>..\..\..\..\Librarys\NV.FileParser.dll</HintPath>
+    <Reference Include="FileParser">
+      <HintPath>..\..\..\..\Development Librarys\FileParser.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -43,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\LWFileWriteMode.cs" />
+    <Compile Include="Enums\LWLogLevel.cs" />
+    <Compile Include="Enums\LWLogMode.cs" />
     <Compile Include="Enums\LWLogType.cs" />
     <Compile Include="Exceptions\LWLogDataNotReadyException.cs" />
     <Compile Include="Exceptions\LWWriterNotReadyException.cs" />
@@ -50,11 +54,8 @@
     <Compile Include="Intrfaces\ILWLogFileLineCreator.cs" />
     <Compile Include="Intrfaces\ILWLogWriter.cs" />
     <Compile Include="LWCategory.cs" />
-    <Compile Include="Enums\LWFileWriteMode.cs" />
-    <Compile Include="Enums\LWLogLevel.cs" />
     <Compile Include="LWLog.cs" />
     <Compile Include="LWManager.cs" />
-    <Compile Include="Enums\LWLogMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -62,11 +63,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Writer\LWEventViewWriter.cs" />
-    <Compile Include="Writer\LWLogFileSingleLine.cs" />
     <Compile Include="Writer\LWLogFileMultiLine.cs" />
+    <Compile Include="Writer\LWLogFileSingleLine.cs" />
     <Compile Include="Writer\LWLogFileWriter.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

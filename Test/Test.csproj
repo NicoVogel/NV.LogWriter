@@ -57,9 +57,9 @@
     <Compile Include="TestLogWriter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NV.LogWriter\NV.LogWriter.csproj">
-      <Project>{a8975adc-d2cc-465f-8867-88410ca2a31c}</Project>
-      <Name>NV.LogWriter</Name>
+    <ProjectReference Include="..\LogWriter\LogWriter.csproj">
+      <Project>{557a2ea5-9875-4a0b-9451-febc83945b0d}</Project>
+      <Name>LogWriter</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

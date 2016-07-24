@@ -2,13 +2,13 @@
 using System.IO;
 using System.Linq;
 
-using NV.FileParser.Parser;
-using NV.LogWriter.Intrfaces;
-using NV.LogWriter.Properties;
+using FileParser.Parser;
+using LogWriter.Intrfaces;
+using LogWriter.Properties;
 using System.Text.RegularExpressions;
 using System.Reflection;
 
-namespace NV.LogWriter.Writer
+namespace LogWriter.Writer
 {
     /// <summary>
     /// This class write logs in a file and manage this process.
@@ -130,7 +130,7 @@ namespace NV.LogWriter.Writer
         /// <summary>
         /// Defines after what amount of logs a new file get created.
         /// <para>Default is 1000 (Range 100-1000000)</para>
-        /// This is only in use if <see cref="WriteMode"/> is set to <see cref="LWFileWrite.LogFileWriteMode.AfterAmountOfLogs"/>.
+        /// This is only in use if <see cref="WriteMode"/> is set to <see cref="LWFileWriteMode.AfterAmountOfLogs"/>.
         /// </summary>
         public uint AmountOfRowsPerFile
         {
@@ -370,7 +370,7 @@ namespace NV.LogWriter.Writer
         /// <param name="log">this log get written.</param>
         public void WriteLog(ILWLogData log)
         {
-            var saver = new TextSaveLoad();
+            var saver = new FPTextSaveLoad();
             if (IsReadyToUse())
             {
                 string nextLog = LineCreator.CreateLogFileLine(log);

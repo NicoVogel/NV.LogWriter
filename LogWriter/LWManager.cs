@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using NV.LogWriter.Enums;
-using NV.LogWriter.Exceptions;
-using NV.LogWriter.Intrfaces;
-using NV.LogWriter.Properties;
-using NV.LogWriter.Writer;
+using LogWriter.Enums;
+using LogWriter.Exceptions;
+using LogWriter.Intrfaces;
+using LogWriter.Properties;
+using LogWriter.Writer;
 
-namespace NV.LogWriter
+namespace LogWriter
 {
     /// <summary>
     /// This class create logs.

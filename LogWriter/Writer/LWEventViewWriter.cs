@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using NV.LogWriter.Intrfaces;
+using LogWriter.Intrfaces;
 
-namespace NV.LogWriter.Writer
+namespace LogWriter.Writer
 {
     public class LWEventViewWriter : ILWLogWriter
     {
