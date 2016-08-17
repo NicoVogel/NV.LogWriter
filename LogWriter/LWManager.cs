@@ -289,15 +289,15 @@ namespace LogWriter
         public bool WriteLog(ILWLogData log)
         {
             //one go further if the log type get logged.
-            if (checkLogType(log))
+            if (LWHelper.CheckLogType(log, Type, LogLevelModeSettings))
             {
                 bool eventView = false;
                 bool logFile = false;
 
                 if (Mode == LWLogMode.EventView || Mode == LWLogMode.EventViewAndFile)
-                    eventView = testILWLogWriter(EventViewWriter);
+                    eventView = LWHelper.TestILWLogWriter(EventViewWriter);
                 if (Mode == LWLogMode.File || Mode == LWLogMode.EventViewAndFile)
-                    logFile = testILWLogWriter(LogFileWriter);
+                    logFile = LWHelper.TestILWLogWriter(LogFileWriter);
 
                 
                 try
@@ -320,65 +320,8 @@ namespace LogWriter
 
 
         #endregion
+        
 
-
-
-        #region Private Method
-
-
-
-        /// <summary>
-        /// This method check if the <see cref="ILWLogWriter"/> object can be used.
-        /// </summary>
-        /// <returns>return true if evrything is ok.</returns>
-        private bool testILWLogWriter(ILWLogWriter writer)
-        {
-            if (writer == null)
-                throw new ArgumentNullException(nameof(writer), Resources.testWriterExceptionNull);
-            if (writer.Enabled && !writer.IsReadyToUse())
-                throw new LWWriterNotReadyException(nameof(writer), Resources.testWriterExceptionNotReady);
-            
-            return true;
-        }
-
-
-
-        /// <summary>
-        /// This method read the log type by its level and the LogLevelModeSettings.
-        /// </summary>
-        /// <param name="log">This log get checked.</param>
-        /// <returns>If the log type is allowed, it return true, else false.</returns>
-        private bool checkLogType(ILWLogData log)
-        {
-            LWLogType logType = LogLevelModeSettings[log.Category.LogLevel];
-
-            switch (Type)
-            {
-                case LWLogType.Release:
-                    //If it is Release, it is allowed. The other two aren't allowed.
-                    if (logType == LWLogType.Release)
-                        return true;
-                    break;
-                case LWLogType.Debug:
-                    //If it is not All, it must be Debug or Release and both are allowed.
-                    if (logType != LWLogType.All)
-                        return true;
-                    break;
-                case LWLogType.All:
-                    //all types are allowed
-                    return true;
-                default:
-                    break;
-            }
-
-            return false;
-        }
-
-
-
-        #endregion
-
-
-
+        
     }
 }

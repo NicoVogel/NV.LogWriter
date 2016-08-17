@@ -54,8 +54,10 @@
     <Compile Include="Intrfaces\ILWLogFileLineCreator.cs" />
     <Compile Include="Intrfaces\ILWLogWriter.cs" />
     <Compile Include="LWCategory.cs" />
+    <Compile Include="LWHelper.cs" />
     <Compile Include="LWLog.cs" />
     <Compile Include="LWManager.cs" />
+    <Compile Include="LWSimpleManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
