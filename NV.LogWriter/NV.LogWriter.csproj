@@ -7,8 +7,8 @@
     <ProjectGuid>{A8975ADC-D2CC-465F-8867-88410CA2A31C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NV.LogWriter</RootNamespace>
-    <AssemblyName>NV.LogWriter</AssemblyName>
+    <RootNamespace>LogWriter</RootNamespace>
+    <AssemblyName>LogWriter</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NV.FileParser">
-      <HintPath>..\..\..\..\Librarys\NV.FileParser.dll</HintPath>
+    <Reference Include="ExceptionObserver, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>External\ExceptionObserver.dll</HintPath>
+    </Reference>
+    <Reference Include="FileParser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>External\FileParser.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -72,6 +77,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="External\ExceptionObserver.dll" />
+    <Content Include="External\ExceptionObserver.XML" />
+    <Content Include="External\FileParser.dll" />
+    <Content Include="External\FileParser.XML" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

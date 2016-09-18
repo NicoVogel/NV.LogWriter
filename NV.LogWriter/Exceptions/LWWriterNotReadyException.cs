@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NV.LogWriter.Exceptions
+namespace LogWriter.Exceptions
 {
     public class LWWriterNotReadyException : ArgumentException
     {

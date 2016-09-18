@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NV.LogWriter.Intrfaces
+namespace LogWriter.Intrfaces
 {
     /// <summary>
     /// This interface is used to create an log writer.

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using NV.LogWriter;
-using NV.LogWriter.Enums;
-using NV.LogWriter.Writer;
+using LogWriter;
+using LogWriter.Enums;
+using LogWriter.Writer;
 
 namespace Test
 {
