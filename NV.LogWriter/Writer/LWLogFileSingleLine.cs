@@ -16,11 +16,11 @@ namespace LogWriter.Writer
         /// </summary>
         /// <param name="log">Create the log with this object.</param>
         /// <returns>Return a string with one line.</returns>
-        /// <exception cref="LWLogDataNotReadyException"></exception>
+        /// <exception cref="LWLogDataException"></exception>
         public string CreateLogFileLine(ILWLogData log)
         {
             if (!LogIsReadyToUse(log))
-                throw new LWLogDataNotReadyException(nameof(log), Resources.testLogDataExceptionNotReady);
+                throw new LWLogDataException(Resources.ErrorLogDataNotReady, DiagnosticEvents.ErrorLineCreatorSingleLogNotReady);
             return String.Format(Resources.SLWriter,
                 log.LogTime,
                 log.LogID == null ? Resources.SLWriterID : log.LogID.ToString(),
@@ -38,7 +38,7 @@ namespace LogWriter.Writer
         /// <typeparam name="T">Object type of the log.</typeparam>
         /// <param name="log">Create the log with this object.</param>
         /// <returns>Return a string with one line.</returns>
-        /// <exception cref="LWLogDataNotReadyException"></exception>
+        /// <exception cref="LWLogDataException"></exception>
         public string CreateLogFileLine<T>(ILWLogData log) where T : ILWLogData
         {
             return CreateLogFileLine(log);

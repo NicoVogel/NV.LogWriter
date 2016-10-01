@@ -30,14 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ExceptionObserver, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>External\ExceptionObserver.dll</HintPath>
-    </Reference>
-    <Reference Include="FileParser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>External\FileParser.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,8 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\LWLogType.cs" />
-    <Compile Include="Exceptions\LWLogDataNotReadyException.cs" />
-    <Compile Include="Exceptions\LWWriterNotReadyException.cs" />
+    <Compile Include="Exceptions\DiagnosticEvents.cs" />
+    <Compile Include="Exceptions\LWException.cs" />
+    <Compile Include="Exceptions\LWLogDataException.cs" />
+    <Compile Include="Exceptions\LWLogManagerException.cs" />
+    <Compile Include="Exceptions\LWLogWriterException.cs" />
     <Compile Include="Intrfaces\ILWLogData.cs" />
     <Compile Include="Intrfaces\ILWLogFileLineCreator.cs" />
     <Compile Include="Intrfaces\ILWLogWriter.cs" />
@@ -71,18 +66,17 @@
     <Compile Include="Writer\LWLogFileMultiLine.cs" />
     <Compile Include="Writer\LWLogFileWriter.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\NV.FileParser\FileParser\FileParser.csproj">
+      <Project>{ece2e8c9-906f-4f00-ad43-110ac1cb841f}</Project>
+      <Name>FileParser</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="External\ExceptionObserver.dll" />
-    <Content Include="External\ExceptionObserver.XML" />
-    <Content Include="External\FileParser.dll" />
-    <Content Include="External\FileParser.XML" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

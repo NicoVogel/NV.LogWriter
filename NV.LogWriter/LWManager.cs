@@ -192,7 +192,7 @@ namespace LogWriter
             }
         }
 
-
+        
 
         #endregion
 
@@ -288,31 +288,35 @@ namespace LogWriter
         /// <returns>true if nothing went wrong, else false</returns>
         public bool WriteLog(ILWLogData log)
         {
-            //one go further if the log type get logged.
-            if (checkLogType(log))
+            try
             {
-                bool eventView = false;
-                bool logFile = false;
-
-                if (Mode == LWLogMode.EventView || Mode == LWLogMode.EventViewAndFile)
-                    eventView = testILWLogWriter(EventViewWriter);
-                if (Mode == LWLogMode.File || Mode == LWLogMode.EventViewAndFile)
-                    logFile = testILWLogWriter(LogFileWriter);
-
-                
-                try
+                if (checkLogType(log))
                 {
+                    bool eventView = false;
+                    bool logFile = false;
+
+                    if (Mode == LWLogMode.EventView || Mode == LWLogMode.EventViewAndFile)
+                        eventView = testILWLogWriter(EventViewWriter);
+                    if (Mode == LWLogMode.File || Mode == LWLogMode.EventViewAndFile)
+                        logFile = testILWLogWriter(LogFileWriter);
+
+
+
                     if (eventView && EventViewWriter.LogIsReadyToUse(log))
                         EventViewWriter.WriteLog(log);
-                    
+
                     if (logFile && LogFileWriter.LogIsReadyToUse(log))
                         LogFileWriter.WriteLog(log);
-                    
+
                 }
-                catch (Exception)
-                {
-                    return false;
-                }
+            }
+            catch (LWException lwEx)
+            {
+                throw lwEx;
+            }
+            catch (Exception ex)
+            {
+                throw new LWLogManagerException(Resources.ErrorUnexpectedManagerException + ex.Message, DiagnosticEvents.LWManagerError);
             }
             return true;
         }
@@ -334,10 +338,10 @@ namespace LogWriter
         private bool testILWLogWriter(ILWLogWriter writer)
         {
             if (writer == null)
-                throw new ArgumentNullException(nameof(writer), Resources.testWriterExceptionNull);
+                throw new LWLogWriterException(Resources.ErrorWriterIsNull, DiagnosticEvents.LWManagerLogWriterIsNull);
             if (writer.Enabled && !writer.IsReadyToUse())
-                throw new LWWriterNotReadyException(nameof(writer), Resources.testWriterExceptionNotReady);
-            
+                throw new LWLogWriterException(Resources.ErrorWriterNotReady, DiagnosticEvents.LWManagerLogWriterIsNotReady);
+
             return true;
         }
 
@@ -350,27 +354,31 @@ namespace LogWriter
         /// <returns>If the log type is allowed, it return true, else false.</returns>
         private bool checkLogType(ILWLogData log)
         {
-            LWLogType logType = LogLevelModeSettings[log.Category.LogLevel];
-
-            switch (Type)
+            if (log != null)
             {
-                case LWLogType.Release:
-                    //If it is Release, it is allowed. The other two aren't allowed.
-                    if (logType == LWLogType.Release)
-                        return true;
-                    break;
-                case LWLogType.Debug:
-                    //If it is not All, it must be Debug or Release and both are allowed.
-                    if (logType != LWLogType.All)
-                        return true;
-                    break;
-                case LWLogType.All:
-                    //all types are allowed
-                    return true;
-                default:
-                    break;
-            }
+                LWLogType logType = LogLevelModeSettings[log.Category.LogLevel];
 
+                switch (Type)
+                {
+                    case LWLogType.Release:
+                        //If it is Release, it is allowed. The other two aren't allowed.
+                        if (logType == LWLogType.Release)
+                            return true;
+                        break;
+                    case LWLogType.Debug:
+                        //If it is not All, it must be Debug or Release and both are allowed.
+                        if (logType != LWLogType.All)
+                            return true;
+                        break;
+                    case LWLogType.All:
+                        //all types are allowed
+                        return true;
+                    default:
+                        break;
+                }
+            }
+            else
+                throw new LWLogDataException(Resources.ErrorLogDataIsNull, DiagnosticEvents.LWManagerLogDataIsNull);
             return false;
         }
 

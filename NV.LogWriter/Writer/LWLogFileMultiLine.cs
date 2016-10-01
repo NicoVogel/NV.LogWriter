@@ -17,11 +17,11 @@ namespace LogWriter.Writer
         /// </summary>
         /// <param name="log">Create the log with this object.</param>
         /// <returns>Return a string with multiple lines.</returns>
-        /// <exception cref="LWLogDataNotReadyException"></exception>
+        /// <exception cref="LWLogDataException"></exception>
         public string CreateLogFileLine(ILWLogData log)
         {
             if (!LogIsReadyToUse(log))
-                throw new LWLogDataNotReadyException(nameof(log), Resources.testLogDataExceptionNotReady);
+                throw new LWLogDataException(Resources.ErrorLogDataNotReady, DiagnosticEvents.ErrorLineCreatorMultipleLogNotReady);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(String.Format(Resources.MLWriterDateTime, log.LogTime));
@@ -42,7 +42,7 @@ namespace LogWriter.Writer
         /// <typeparam name="T">Object type of the log.</typeparam>
         /// <param name="log">Create the log with this object.</param>
         /// <returns>Return a string with multiple lines.</returns>
-        /// <exception cref="LWLogDataNotReadyException"></exception>
+        /// <exception cref="LWLogDataException"></exception>
         public string CreateLogFileLine<T>(ILWLogData log) where T : ILWLogData
         {
             return CreateLogFileLine(log);
