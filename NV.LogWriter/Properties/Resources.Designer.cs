@@ -88,6 +88,15 @@ namespace LogWriter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The error message is empty. The simple log manager can not log a empty message..
+        /// </summary>
+        internal static string ErrorMessageEmpty {
+            get {
+                return ResourceManager.GetString("ErrorMessageEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An exception occured in the Manager with the message: .
         /// </summary>
         internal static string ErrorUnexpectedManagerException {

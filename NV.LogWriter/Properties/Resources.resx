@@ -177,4 +177,8 @@
     <value>An exception while writing a log with the message:</value>
     <comment>exception</comment>
   </data>
+  <data name="ErrorMessageEmpty" xml:space="preserve">
+    <value>The error message is empty. The simple log manager can not log a empty message.</value>
+    <comment>exception</comment>
+  </data>
 </root>
