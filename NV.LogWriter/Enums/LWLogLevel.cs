@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NV.LogWriter.Enums
+﻿
+namespace LogWriter.Enums
 {
     /// <summary>
-    /// The levels a Log can have
+    /// The log levels determine the specification of this log.
     /// </summary>
     public enum LWLogLevel
     {

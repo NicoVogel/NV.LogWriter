@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using NV.LogWriter.Enums;
+using LogWriter.Enums;
 
-namespace NV.LogWriter
+namespace LogWriter
 {
     /// <summary>
     /// This class is a log category. Its used to seperate different logs.

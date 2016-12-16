@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NV.LogWriter.Intrfaces;
+using LogWriter.Intrfaces;
 
-namespace NV.LogWriter
+namespace LogWriter
 {
     /// <summary>
     /// Contain all information for the log
@@ -112,9 +112,7 @@ namespace NV.LogWriter
 
 
         #endregion
-
-
-
+        
         #region Constructors
 
 

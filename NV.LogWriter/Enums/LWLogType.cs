@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NV.LogWriter.Enums
+namespace LogWriter.Enums
 {
     /// <summary>
     /// Define which log type to use

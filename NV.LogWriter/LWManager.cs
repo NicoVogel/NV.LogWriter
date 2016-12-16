@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using NV.LogWriter.Enums;
-using NV.LogWriter.Exceptions;
-using NV.LogWriter.Intrfaces;
-using NV.LogWriter.Properties;
-using NV.LogWriter.Writer;
+using LogWriter.Enums;
+using LogWriter.Exceptions;
+using LogWriter.Intrfaces;
+using LogWriter.Properties;
+using LogWriter.Writer;
 
-namespace NV.LogWriter
+namespace LogWriter
 {
     /// <summary>
     /// This class create logs.
@@ -195,9 +195,7 @@ namespace NV.LogWriter
 
 
         #endregion
-
-
-
+        
         #region Constructors
 
 
@@ -274,9 +272,7 @@ namespace NV.LogWriter
 
 
         #endregion
-
-
-
+        
         #region Public Methods
 
 
@@ -289,18 +285,17 @@ namespace NV.LogWriter
         public bool WriteLog(ILWLogData log)
         {
             //one go further if the log type get logged.
-            if (checkLogType(log))
+            if (LWHelper.CheckLogType(log, Type, LogLevelModeSettings))
             {
                 bool eventView = false;
                 bool logFile = false;
 
-                if (Mode == LWLogMode.EventView || Mode == LWLogMode.EventViewAndFile)
-                    eventView = testILWLogWriter(EventViewWriter);
-                if (Mode == LWLogMode.File || Mode == LWLogMode.EventViewAndFile)
-                    logFile = testILWLogWriter(LogFileWriter);
+                if ((Mode & LWLogMode.EventView) == LWLogMode.EventView)
+                    eventView = LWHelper.TestILWLogWriter(EventViewWriter);
+                if ((Mode & LWLogMode.File) == LWLogMode.File)
 
-                
-                try
+
+                    try
                 {
                     if (eventView && EventViewWriter.LogIsReadyToUse(log))
                         EventViewWriter.WriteLog(log);
@@ -320,65 +315,6 @@ namespace NV.LogWriter
 
 
         #endregion
-
-
-
-        #region Private Method
-
-
-
-        /// <summary>
-        /// This method check if the <see cref="ILWLogWriter"/> object can be used.
-        /// </summary>
-        /// <returns>return true if evrything is ok.</returns>
-        private bool testILWLogWriter(ILWLogWriter writer)
-        {
-            if (writer == null)
-                throw new ArgumentNullException(nameof(writer), Resources.testWriterExceptionNull);
-            if (writer.Enabled && !writer.IsReadyToUse())
-                throw new LWWriterNotReadyException(nameof(writer), Resources.testWriterExceptionNotReady);
-            
-            return true;
-        }
-
-
-
-        /// <summary>
-        /// This method read the log type by its level and the LogLevelModeSettings.
-        /// </summary>
-        /// <param name="log">This log get checked.</param>
-        /// <returns>If the log type is allowed, it return true, else false.</returns>
-        private bool checkLogType(ILWLogData log)
-        {
-            LWLogType logType = LogLevelModeSettings[log.Category.LogLevel];
-
-            switch (Type)
-            {
-                case LWLogType.Release:
-                    //If it is Release, it is allowed. The other two aren't allowed.
-                    if (logType == LWLogType.Release)
-                        return true;
-                    break;
-                case LWLogType.Debug:
-                    //If it is not All, it must be Debug or Release and both are allowed.
-                    if (logType != LWLogType.All)
-                        return true;
-                    break;
-                case LWLogType.All:
-                    //all types are allowed
-                    return true;
-                default:
-                    break;
-            }
-
-            return false;
-        }
-
-
-
-        #endregion
-
-
-
+        
     }
 }

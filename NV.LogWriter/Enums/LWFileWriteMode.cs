@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NV.LogWriter.Writer
+namespace LogWriter.Writer
 {
     /// <summary>
     /// Define in which interval a new log file is created

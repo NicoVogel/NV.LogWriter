@@ -1,29 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NV.LogWriter.Enums
+namespace LogWriter.Enums
 {
 
     /// <summary>
-    /// Define which log mode to use
+    /// Define which log mode to use.
     /// </summary>
+    [Flags]
     public enum LWLogMode
     {
         /// <summary>
         /// Only log in eventview
         /// </summary>
-        EventView,
+        EventView = 1,
         /// <summary>
         /// Only log in a file
         /// </summary>
-        File,
-        /// <summary>
-        /// Log in eventview and file
-        /// </summary>
-        EventViewAndFile
+        File = 2,
     }
 
 }
