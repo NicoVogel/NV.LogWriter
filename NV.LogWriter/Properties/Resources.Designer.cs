@@ -61,6 +61,69 @@ namespace LogWriter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ILWLogData object is not set to an instance!.
+        /// </summary>
+        internal static string ErrorLogDataIsNull {
+            get {
+                return ResourceManager.GetString("ErrorLogDataIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ILWLogData is not ready to use!.
+        /// </summary>
+        internal static string ErrorLogDataNotReady {
+            get {
+                return ResourceManager.GetString("ErrorLogDataNotReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An exception while writing a log with the message:.
+        /// </summary>
+        internal static string ErrorLogWriterWriteLog {
+            get {
+                return ResourceManager.GetString("ErrorLogWriterWriteLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The error message is empty. The simple log manager can not log a empty message..
+        /// </summary>
+        internal static string ErrorMessageEmpty {
+            get {
+                return ResourceManager.GetString("ErrorMessageEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An exception occured in the Manager with the message: .
+        /// </summary>
+        internal static string ErrorUnexpectedManagerException {
+            get {
+                return ResourceManager.GetString("ErrorUnexpectedManagerException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ILWLogWriter object is not set to an instance!.
+        /// </summary>
+        internal static string ErrorWriterIsNull {
+            get {
+                return ResourceManager.GetString("ErrorWriterIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ILWLogWriter is not ready to use!.
+        /// </summary>
+        internal static string ErrorWriterNotReady {
+            get {
+                return ResourceManager.GetString("ErrorWriterNotReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log.
         /// </summary>
         internal static string logFileNamePrefix {
@@ -138,33 +201,6 @@ namespace LogWriter.Properties {
         internal static string SLWriterID {
             get {
                 return ResourceManager.GetString("SLWriterID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ILWLogData is not ready to use!.
-        /// </summary>
-        internal static string testLogDataExceptionNotReady {
-            get {
-                return ResourceManager.GetString("testLogDataExceptionNotReady", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ILWLogWriter is not ready to use!.
-        /// </summary>
-        internal static string testWriterExceptionNotReady {
-            get {
-                return ResourceManager.GetString("testWriterExceptionNotReady", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ILWLogWriter object is not set to an instance!.
-        /// </summary>
-        internal static string testWriterExceptionNull {
-            get {
-                return ResourceManager.GetString("testWriterExceptionNull", resourceCulture);
             }
         }
     }

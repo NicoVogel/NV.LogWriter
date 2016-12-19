@@ -153,16 +153,32 @@
     <value>\t\t</value>
     <comment>Single Line Writer: if logID is empty</comment>
   </data>
-  <data name="testLogDataExceptionNotReady" xml:space="preserve">
+  <data name="ErrorLogDataNotReady" xml:space="preserve">
     <value>ILWLogData is not ready to use!</value>
     <comment>exception</comment>
   </data>
-  <data name="testWriterExceptionNotReady" xml:space="preserve">
+  <data name="ErrorWriterNotReady" xml:space="preserve">
     <value>ILWLogWriter is not ready to use!</value>
     <comment>exception</comment>
   </data>
-  <data name="testWriterExceptionNull" xml:space="preserve">
+  <data name="ErrorWriterIsNull" xml:space="preserve">
     <value>ILWLogWriter object is not set to an instance!</value>
+    <comment>exception</comment>
+  </data>
+  <data name="ErrorLogDataIsNull" xml:space="preserve">
+    <value>ILWLogData object is not set to an instance!</value>
+    <comment>exception</comment>
+  </data>
+  <data name="ErrorUnexpectedManagerException" xml:space="preserve">
+    <value>An exception occured in the Manager with the message: </value>
+    <comment>excepion</comment>
+  </data>
+  <data name="ErrorLogWriterWriteLog" xml:space="preserve">
+    <value>An exception while writing a log with the message:</value>
+    <comment>exception</comment>
+  </data>
+  <data name="ErrorMessageEmpty" xml:space="preserve">
+    <value>The error message is empty. The simple log manager can not log a empty message.</value>
     <comment>exception</comment>
   </data>
 </root>

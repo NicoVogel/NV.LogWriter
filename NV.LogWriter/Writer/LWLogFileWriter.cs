@@ -5,6 +5,10 @@ using System.Linq;
 using FileParser.Parser;
 using LogWriter.Intrfaces;
 using LogWriter.Properties;
+using FileParser.Parser;
+using LogWriter.Intrfaces;
+using LogWriter.Exceptions;
+using LogWriter.Properties;
 using System.Text.RegularExpressions;
 using System.Reflection;
 
@@ -370,20 +374,31 @@ namespace LogWriter.Writer
         /// <param name="log">this log get written.</param>
         public void WriteLog(ILWLogData log)
         {
-            var saver = new FPTextSaveLoad();
-            if (IsReadyToUse())
+            try
             {
-                string nextLog = LineCreator.CreateLogFileLine(log);
-                string filePath = String.Format(LogPath + "/" + FullFileName);
-                string[] rows;
-                if (saver.LoadRows(filePath, out rows))
+                var saver = new FPTextSaveLoad();
+                if (IsReadyToUse())
                 {
-                    if (rows.Length > AmountOfRowsPerFile)
-                        filePath = String.Format(LogPath + "/" + NextFullFileName);
-                    else
-                        nextLog = String.Join(Environment.NewLine, rows) + Environment.NewLine + nextLog;
-                    saver.Save(nextLog, filePath);
+                    string nextLog = LineCreator.CreateLogFileLine(log);
+                    string filePath = String.Format(LogPath + "/" + FullFileName);
+                    string[] rows;
+                    if (saver.LoadRows(filePath, out rows))
+                    {
+                        if (rows.Length > AmountOfRowsPerFile)
+                            filePath = String.Format(LogPath + "/" + NextFullFileName);
+                        else
+                            nextLog = String.Join(Environment.NewLine, rows) + Environment.NewLine + nextLog;
+                        saver.Save(nextLog, filePath);
+                    }
                 }
+            }
+            catch(LWException lwEx)
+            {
+                throw lwEx;
+            }
+            catch(Exception ex)
+            {
+                throw new LWLogWriterException(Resources.ErrorLogWriterWriteLog + ex.Message, ex, DiagnosticEvents.ErrorLogWriter);
             }
         }
 
@@ -393,9 +408,9 @@ namespace LogWriter.Writer
         /// Is the same as <see cref="WriteLog(ILWLogData)"/>
         /// This method write the next log in the log file.
         /// </summary>
-        /// <typeparam name="t">Object type of the log.</typeparam>
+        /// <typeparam name="T">Object type of the log.</typeparam>
         /// <param name="log">this log get written.</param>
-        public void WriteLog<t>(ILWLogData log)
+        public void WriteLog<T>(ILWLogData log)
         {
             WriteLog(log);
         }

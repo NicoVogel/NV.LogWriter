@@ -12,16 +12,15 @@ namespace LogWriter
     /// <summary>
     /// This class create logs.
     /// </summary>
-    public class LWManager
+    public class LWSimpleManager
     {
 
-        private ILWLogWriter m_eventView;
-        private ILWLogWriter m_logFile;
+        private LWEventViewWriter m_eventView;
+        private LWLogFileWriter m_logFile;
 
         private LWLogType m_type;
         private LWLogMode m_mode;
         private Guid m_processID;
-        private Dictionary<LWLogLevel, LWLogType> m_logLevelModeSettings;
 
 
 
@@ -49,29 +48,9 @@ namespace LogWriter
 
 
         /// <summary>
-        /// Defines which level is for which log mode.
-        /// </summary>
-        public Dictionary<LWLogLevel, LWLogType> LogLevelModeSettings
-        {
-            get
-            {
-                if (m_logLevelModeSettings == null)
-                    m_logLevelModeSettings = LogLevelModeSettingsDefault;
-                return m_logLevelModeSettings;
-            }
-
-            set
-            {
-                m_logLevelModeSettings = value;
-            }
-        }
-
-
-
-        /// <summary>
         /// The default settings for the <see cref="LogLevelModeSettings"/>.
         /// </summary>
-        public Dictionary<LWLogLevel, LWLogType> LogLevelModeSettingsDefault
+        public Dictionary<LWLogLevel, LWLogType> LogLevelModeSettings
         {
             get
             {
@@ -90,33 +69,15 @@ namespace LogWriter
 
 
         /// <summary>
-        /// ID of the process
-        /// </summary>
-        public Guid ProcessID
-        {
-            get
-            {
-                return m_processID;
-            }
-
-            set
-            {
-                m_processID = value;
-            }
-        }
-
-
-
-        /// <summary>
         /// This object wirte the log in the event view.
         /// <para>Default is <see cref="EventViewWriterDefault"/>.</para>
         /// </summary>
-        public ILWLogWriter EventViewWriter
+        public LWEventViewWriter EventViewWriter
         {
             get
             {
                 if (m_eventView == null)
-                    m_eventView = EventViewWriterDefault;
+                    m_eventView = new LWEventViewWriter();
                 return m_eventView;
             }
 
@@ -129,47 +90,21 @@ namespace LogWriter
 
 
         /// <summary>
-        /// The default Event View Writer
-        /// </summary>
-        public ILWLogWriter EventViewWriterDefault
-        {
-            get
-            {
-                return new LWEventViewWriter();
-            }
-        }
-
-
-
-        /// <summary>
         /// This object wirte the log file.
         /// <para>Default is <see cref="LogFileWriterDefault"/>.</para>
         /// </summary>
-        public ILWLogWriter LogFileWriter
+        public LWLogFileWriter LogFileWriter
         {
             get
             {
                 if (m_logFile == null)
-                    m_logFile = LogFileWriterDefault;
+                    m_logFile = new LWLogFileWriter();
                 return m_logFile;
             }
 
             set
             {
                 m_logFile = value;
-            }
-        }
-
-
-
-        /// <summary>
-        /// The default Log File Writer
-        /// </summary>
-        public ILWLogWriter LogFileWriterDefault
-        {
-            get
-            {
-                return new LWLogFileWriter();
             }
         }
 
@@ -192,10 +127,26 @@ namespace LogWriter
             }
         }
 
-        
+
+
+        public Dictionary<string, LWCategory> Categorys
+        {
+            get
+            {
+                var defaultSet = new Dictionary<string, LWCategory>();
+                foreach (LWLogLevel item in Enum.GetValues(typeof(LWLogLevel)))
+                {
+                    defaultSet.Add(nameof(item), new LWCategory(nameof(item), item));
+                }
+                return defaultSet;
+            }
+        }
+
 
         #endregion
-        
+
+
+
         #region Constructors
 
 
@@ -205,9 +156,8 @@ namespace LogWriter
         /// <para><see cref="LogLevelModeSettings"/> are set to default.</para>
         /// <see cref="Type"/> is set to <see cref="LWLogType.Release"/>.
         /// </summary>
-        public LWManager()
+        public LWSimpleManager()
         {
-            LogLevelModeSettings = LogLevelModeSettingsDefault;
             Type = LWLogType.Release;
             Mode = LWLogMode.EventView;
         }
@@ -217,24 +167,10 @@ namespace LogWriter
         /// <summary>
         /// Create a new instance of <see cref="LWManager"/>.
         /// <para><see cref="LogLevelModeSettings"/> are set to default.</para>
-        /// <see cref="Type"/> is set to <see cref="LWLogType.Release"/>.
-        /// </summary>
-        /// <param name="processID">Set the processID</param>
-        public LWManager(Guid processID) : this()
-        {
-            ProcessID = processID;
-        }
-
-
-
-        /// <summary>
-        /// Create a new instance of <see cref="LWManager"/>.
-        /// <para><see cref="LogLevelModeSettings"/> are set to default.</para>
         /// <see cref="Type"/> is set to <paramref name="type"/>.
         /// </summary>
-        /// <param name="processID">Set the processID</param>
         /// <param name="type">This is the type for the log manager.</param>
-        public LWManager(Guid processID, LWLogType type) : this(processID)
+        public LWSimpleManager(LWLogType type) : this()
         {
             Type = type;
         }
@@ -246,9 +182,8 @@ namespace LogWriter
         /// <para><see cref="LogLevelModeSettings"/> are set to default.</para>
         /// <see cref="Type"/> is set to <paramref name="mode"/>.
         /// </summary>
-        /// <param name="processID">Set the processID</param>
         /// <param name="mode">This is the mode for the log manager.</param>
-        public LWManager(Guid processID, LWLogMode mode) : this(processID)
+        public LWSimpleManager(LWLogMode mode) : this()
         {
             Mode = mode;
         }
@@ -260,10 +195,9 @@ namespace LogWriter
         /// <para><see cref="LogLevelModeSettings"/> are set to default.</para>
         /// <see cref="Type"/> is set to <paramref name="mode"/>.
         /// </summary>
-        /// <param name="processID">Set the processID</param>
         /// <param name="type">This is the type for the log manager.</param>
         /// <param name="mode">This is the mode for the log manager.</param>
-        public LWManager(Guid processID, LWLogType type, LWLogMode mode) : this(processID)
+        public LWSimpleManager(LWLogType type, LWLogMode mode) : this()
         {
             Mode = mode;
             Type = type;
@@ -272,38 +206,25 @@ namespace LogWriter
 
 
         #endregion
-        
+
+
+
         #region Public Methods
 
 
 
         /// <summary>
-        /// Write a log in the Eventview and to a local File
+        /// Write a log with the category None.
         /// </summary>
-        /// <param name="log">This log get write.</param>
-        /// <returns>true if nothing went wrong, else false</returns>
-        public bool WriteLog(ILWLogData log)
+        /// <param name="message">this message get logged.</param>
+        /// <param name="id">log id</param>
+        /// <param name="value">additional value</param>
+        /// <returns></returns>
+        public void WriteLogNone(string message, uint id, object value = null)
         {
-            //one go further if the log type get logged.
-            if (LWHelper.CheckLogType(log, Type, LogLevelModeSettings))
+            try
             {
-                bool eventView = false;
-                bool logFile = false;
-
-                if ((Mode & LWLogMode.EventView) == LWLogMode.EventView)
-                    eventView = LWHelper.TestILWLogWriter(EventViewWriter);
-                if ((Mode & LWLogMode.File) == LWLogMode.File)
-
-
-                    try
-                {
-                    if (eventView && EventViewWriter.LogIsReadyToUse(log))
-                        EventViewWriter.WriteLog(log);
-
-                    if (logFile && LogFileWriter.LogIsReadyToUse(log))
-                        LogFileWriter.WriteLog(log);
-
-                }
+                log(new LWLog(message, Categorys[nameof(LWLogLevel.None)], id, value));
             }
             catch (LWException lwEx)
             {
@@ -313,7 +234,131 @@ namespace LogWriter
             {
                 throw new LWLogManagerException(Resources.ErrorUnexpectedManagerException + ex.Message, DiagnosticEvents.LWManagerError);
             }
-            return true;
+        }
+
+
+
+        /// <summary>
+        /// Write a log with the category Information.
+        /// </summary>
+        /// <param name="message">this message get logged.</param>
+        /// <param name="id">log id</param>
+        /// <param name="value">additional value</param>
+        /// <returns></returns>
+        public void WriteLogInformation(string message, uint id, object value = null)
+        {
+            try
+            {
+                log(new LWLog(message, Categorys[nameof(LWLogLevel.Information)], id, value));
+            }
+            catch (LWException lwEx)
+            {
+                throw lwEx;
+            }
+            catch (Exception ex)
+            {
+                throw new LWLogManagerException(Resources.ErrorUnexpectedManagerException + ex.Message, DiagnosticEvents.LWManagerError);
+            }
+        }
+
+
+
+        /// <summary>
+        /// Write a log with the category Verbose.
+        /// </summary>
+        /// <param name="message">this message get logged.</param>
+        /// <param name="id">log id</param>
+        /// <param name="value">additional value</param>
+        /// <returns></returns>
+        public void WriteLogVerbose(string message, uint id, object value = null)
+        {
+            try
+            {
+                log(new LWLog(message, Categorys[nameof(LWLogLevel.Verbose)], id, value));
+            }
+            catch (LWException lwEx)
+            {
+                throw lwEx;
+            }
+            catch (Exception ex)
+            {
+                throw new LWLogManagerException(Resources.ErrorUnexpectedManagerException + ex.Message, DiagnosticEvents.LWManagerError);
+            }
+        }
+
+
+
+        /// <summary>
+        /// Write a log with the category Warning.
+        /// </summary>
+        /// <param name="message">this message get logged.</param>
+        /// <param name="id">log id</param>
+        /// <param name="value">additional value</param>
+        /// <returns></returns>
+        public void WriteLogWarning(string message, uint id, object value = null)
+        {
+            try
+            {
+                log(new LWLog(message, Categorys[nameof(LWLogLevel.Warning)], id, value));
+            }
+            catch (LWException lwEx)
+            {
+                throw lwEx;
+            }
+            catch (Exception ex)
+            {
+                throw new LWLogManagerException(Resources.ErrorUnexpectedManagerException + ex.Message, DiagnosticEvents.LWManagerError);
+            }
+        }
+
+
+
+        /// <summary>
+        /// Write a log with the category Error.
+        /// </summary>
+        /// <param name="message">this message get logged.</param>
+        /// <param name="id">log id</param>
+        /// <param name="value">additional value</param>
+        /// <returns></returns>
+        public void WriteLogError(string message, uint id, object value = null)
+        {
+            try
+            {
+                log(new LWLog(message, Categorys[nameof(LWLogLevel.Error)], id, value));
+            }
+            catch (LWException lwEx)
+            {
+                throw lwEx;
+            }
+            catch (Exception ex)
+            {
+                throw new LWLogManagerException(Resources.ErrorUnexpectedManagerException + ex.Message, DiagnosticEvents.LWManagerError);
+            }
+        }
+
+
+
+        /// <summary>
+        /// Write a log with the category Critical.
+        /// </summary>
+        /// <param name="message">this message get logged.</param>
+        /// <param name="id">log id</param>
+        /// <param name="value">additional value</param>
+        /// <returns></returns>
+        public void WriteLogCritical(string message, uint id, object value = null)
+        {
+            try
+            {
+                log(new LWLog(message, Categorys[nameof(LWLogLevel.Critical)], id, value));
+            }
+            catch (LWException lwEx)
+            {
+                throw lwEx;
+            }
+            catch (Exception ex)
+            {
+                throw new LWLogManagerException(Resources.ErrorUnexpectedManagerException + ex.Message, DiagnosticEvents.LWManagerError);
+            }
         }
 
 
@@ -323,6 +368,31 @@ namespace LogWriter
 
 
         #region Private Method
+
+
+        private void log(LWLog log)
+        {
+            if (!String.IsNullOrEmpty(log.LogMessage))
+            {
+                bool eventView = false;
+                bool logFile = false;
+
+                if (Mode == LWLogMode.EventView || Mode == LWLogMode.EventViewAndFile)
+                    eventView = testILWLogWriter(EventViewWriter);
+                if (Mode == LWLogMode.File || Mode == LWLogMode.EventViewAndFile)
+                    logFile = testILWLogWriter(LogFileWriter);
+
+
+
+                if (eventView && EventViewWriter.LogIsReadyToUse(log))
+                    EventViewWriter.WriteLog(log);
+
+                if (logFile && LogFileWriter.LogIsReadyToUse(log))
+                    LogFileWriter.WriteLog(log);
+            }
+            else
+                throw new LWLogManagerException(Resources.ErrorMessageEmpty, DiagnosticEvents.LWManagerError);
+        }
 
 
 
@@ -380,6 +450,8 @@ namespace LogWriter
 
 
         #endregion
-        
+
+
+
     }
 }
