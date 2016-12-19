@@ -1,0 +1,588 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FileParser</name>
+    </assembly>
+    <members>
+        <member name="T:FileParser.Exceptions.DiagnosticEvents">
+            <summary>
+            This class contains the event ids of this project
+            </summary>
+        </member>
+        <member name="T:FileParser.Exceptions.FPException">
+            <summary>
+            This is the main exception class for this DLL. All exceptions from "FileParser.Exceptions" inherit from this exception.
+            </summary>
+        </member>
+        <member name="P:FileParser.Exceptions.FPException.EventID">
+            <summary>
+            Contains the event id of this exception
+            </summary>
+        </member>
+        <member name="M:FileParser.Exceptions.FPException.#ctor(System.String)">
+            <summary>
+            Create a new <see cref="T:FileParser.Exceptions.FPException"/> with a message.
+            </summary>
+            <param name="message">Contain the exception message</param>
+        </member>
+        <member name="M:FileParser.Exceptions.FPException.#ctor(System.String,System.Int32)">
+            <summary>
+            Create a new <see cref="T:FileParser.Exceptions.FPException"/> with a message and an event id.
+            </summary>
+            <param name="message">Contain the exception message</param>
+            <param name="eventID">The id of this exception</param>
+        </member>
+        <member name="M:FileParser.Exceptions.FPException.#ctor(System.String,System.Exception)">
+            <summary>
+            Create a new <see cref="T:FileParser.Exceptions.FPException"/> with a message and inner exception.
+            </summary>
+            <param name="message">Contain the exception message</param>
+            <param name="innerException">This is the inner exception for this exception</param>
+        </member>
+        <member name="M:FileParser.Exceptions.FPException.#ctor(System.String,System.Exception,System.Int32)">
+            <summary>
+            Create a new <see cref="T:FileParser.Exceptions.FPException"/> with a message, inner exception and event id.
+            </summary>
+            <param name="message">Contain the exception message</param>
+            <param name="innerException">This is the inner exception for this exception</param>
+            <param name="eventID">The id of this exception</param>
+        </member>
+        <member name="T:FileParser.Exceptions.FPExtensionException">
+            <summary>
+            Get thrown if the file extension is to long or to short.
+            </summary>
+        </member>
+        <member name="M:FileParser.Exceptions.FPExtensionException.#ctor(System.String,System.Int32)">
+            <summary>
+            create a new <see cref="T:FileParser.Exceptions.FPExtensionException"/> with a message.
+            </summary>
+            <param name="message">Contain the exception message</param>
+            <param name="eventID">The id of this exception</param>
+        </member>
+        <member name="T:FileParser.Exceptions.FPManagerException">
+            <summary>
+            This exception get thrown for unexpected errors in the <see cref="T:FileParser.FPDataManager"/>
+            </summary>
+        </member>
+        <member name="M:FileParser.Exceptions.FPManagerException.#ctor(System.String,System.Exception,System.Int32)">
+            <summary>
+            Create a new <see cref="T:FileParser.Exceptions.FPManagerException"/> with a message, inner exception and event id.
+            </summary>
+            <param name="message">Contain the exception message</param>
+            <param name="innerException">This is the inner exception for this exception</param>
+            <param name="eventID">The id of this exception</param>
+        </member>
+        <member name="T:FileParser.Exceptions.FPNotAllowedIOException">
+            <summary>
+            Get thrown if for the extension exists no <see cref="T:FileParser.ISaveLoad"/> object.
+            </summary>
+        </member>
+        <member name="M:FileParser.Exceptions.FPNotAllowedIOException.#ctor(System.String)">
+            <summary>
+            Create a <see cref="T:FileParser.Exceptions.FPNotAllowedIOException"/>
+            </summary>
+            <param name="message">This is the error message</param>
+        </member>
+        <member name="T:FileParser.Exceptions.FPParserExceptionHandler">
+            <summary>
+            This class handles the Exceptions for the parser.
+            </summary>
+        </member>
+        <member name="M:FileParser.Exceptions.FPParserExceptionHandler.HandleParserLoadException(System.Exception,System.String,System.String,System.Int32)">
+            <summary>
+            Create a new <see cref="T:FileParser.Exceptions.FPParserLoadException"/>. 
+            After that it thows the exception.
+            </summary>
+            <param name="innerException">This is the inner exception for the new exception.</param>
+            <param name="className">Needed for the exception message.</param>
+            <param name="path">This value gets saved into the exception data property. "path" is the key</param>
+            <param name="eventID">The id of this exception</param>
+        </member>
+        <member name="M:FileParser.Exceptions.FPParserExceptionHandler.HandleParserSaveException(System.Exception,System.String,System.String,System.Object,System.Type,System.Int32)">
+            <summary>
+            Create a new <see cref="T:FileParser.Exceptions.FPParserSaveException"/>. 
+            After that it thows the exception.
+            </summary>
+            <param name="innerException">This is the inner exception for the new exception.</param>
+            <param name="className">Needed for the exception message.</param>
+            <param name="path">This value gets saved into the exception data property. "path" is the key</param>
+            <param name="value">This value gets saved into the exception data property. "value" is the key</param>
+            <param name="type">This value gets saved into the exception data property. "type" is the key</param>
+            <param name="eventID">The id of this exception</param>
+        </member>
+        <member name="T:FileParser.Exceptions.FPParserLoadException">
+            <summary>
+            Get thrown if an exception accour while loading a file.
+            </summary>
+        </member>
+        <member name="M:FileParser.Exceptions.FPParserLoadException.#ctor(System.String,System.Exception,System.Int32)">
+            <summary>
+            create a new <see cref="T:FileParser.Exceptions.FPParserLoadException"/> with a message and a inner exceptin.
+            </summary>
+            <param name="message">Contain the exception message</param>
+            <param name="innerException">Contain the exception that was thrown while loading a file</param>
+            <param name="eventID">The id of this exception</param>
+        </member>
+        <member name="T:FileParser.Exceptions.FPParserSaveException">
+            <summary>
+            Get thrown if an exception accour while saving a file.
+            </summary>
+        </member>
+        <member name="M:FileParser.Exceptions.FPParserSaveException.#ctor(System.String,System.Exception,System.Int32)">
+            <summary>
+            create a new <see cref="T:FileParser.Exceptions.FPParserSaveException"/> with a message and a inner exception.
+            </summary>
+            <param name="message">Contain the exception message</param>
+            <param name="innerException">Contain the exception that was thrown while saving a file</param>
+            <param name="eventID">The id of this exception</param>
+        </member>
+        <member name="T:FileParser.Exceptions.FPPathLengthException">
+            <summary>
+            Get thrown if the file path is to long.
+            </summary>
+        </member>
+        <member name="M:FileParser.Exceptions.FPPathLengthException.#ctor(System.String,System.Int32)">
+            <summary>
+            create a new <see cref="T:FileParser.Exceptions.FPPathLengthException"/> with a message.
+            </summary>
+            <param name="message">Contain the exception message</param>
+            <param name="eventID">The id of this exception</param>
+        </member>
+        <member name="T:FileParser.FPDataManager">
+            <summary>
+            This class manage the save and load commands.
+            </summary>
+        </member>
+        <member name="P:FileParser.FPDataManager.AllowedIO">
+            <summary>
+            Contain the allowed IO extentions.
+            </summary>
+        </member>
+        <member name="P:FileParser.FPDataManager.SaveLoad">
+            <summary>
+            Contain the <see cref="T:FileParser.ISaveLoad"/> objects.
+            </summary>
+        </member>
+        <member name="P:FileParser.FPDataManager.DefaultSaveLoad">
+            <summary>
+            Contain the default save load objects.
+            </summary>
+        </member>
+        <member name="M:FileParser.FPDataManager.#ctor">
+            <summary>
+            Create a new instance of <see cref="T:FileParser.FPDataManager"/>.
+            </summary>
+        </member>
+        <member name="M:FileParser.FPDataManager.Save``1(``0,System.String,System.String)">
+            <summary>
+            Save the <paramref name="value"/> at <paramref name="path"/> with the <paramref name="type"/>.
+            </summary>
+            <typeparam name="T">This object type get saved.</typeparam>
+            <param name="value">This object get saved.</param>
+            <param name="path">Save the object at this path. String include file name!</param>
+            <param name="type">Defines which save type be used to save the <paramref name="value"/>.</param>
+            <exception cref="T:FileParser.Exceptions.FPException"></exception>
+        </member>
+        <member name="M:FileParser.FPDataManager.Load``1(System.String,System.String)">
+            <summary>
+            Load an object form <paramref name="path"/> with the <paramref name="type"/>.
+            </summary>
+            <typeparam name="T">This object type get loaded</typeparam>
+            <param name="path">Load the object from this path. String include file name!</param>
+            <param name="type">Defines which load type be used to load the object.</param>
+            <returns>Returns an object of type T</returns>
+            <exception cref="T:FileParser.Exceptions.FPException"></exception>
+        </member>
+        <member name="M:FileParser.FPDataManager.defaultSaveLoadObjects">
+            <summary>
+            This method create the default set of <see cref="T:FileParser.ISaveLoad"/> objects.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FileParser.FPHelper">
+            <summary>
+            This class helps to provent errors.
+            </summary>
+        </member>
+        <member name="F:FileParser.FPHelper.MaxFileLenght_Windows2000">
+            <summary>
+            The max length of Windows 2000 is 254
+            </summary>
+        </member>
+        <member name="F:FileParser.FPHelper.MaxFileLenght_WindowsXP">
+            <summary>
+            The max length of Windows Xp is 255
+            </summary>
+        </member>
+        <member name="F:FileParser.FPHelper.MaxFileLenght_WindowsVista">
+            <summary>
+            The max length of Windows Vista is 260
+            </summary>
+        </member>
+        <member name="F:FileParser.FPHelper.MaxFileLength_Windows7">
+            <summary>
+            The max length of Windows 7 is 260
+            </summary>
+        </member>
+        <member name="F:FileParser.FPHelper.LegalCharacter">
+            <summary>
+            This regex contain all legal caracters.
+            </summary>
+        </member>
+        <member name="M:FileParser.FPHelper.IsPathValid(System.String)">
+            <summary>
+            Look for invalid file name characters and check the length with 255.
+            </summary>
+            <param name="path">This string get tested.</param>
+            <returns>true if everything is ok, false if not.</returns>
+        </member>
+        <member name="M:FileParser.FPHelper.IsPathValid(System.String,FileParser.Exceptions.FPException@)">
+            <summary>
+            Look for invalid file name characters in the parameter string.
+            </summary>
+            <param name="path">This string get tested.</param>
+            <param name="ex">return an <see cref="T:FileParser.Exceptions.FPException"/> object that can be thrown.</param>
+            <returns>true if everything is ok, false if not.</returns>
+        </member>
+        <member name="M:FileParser.FPHelper.IsExtentionValid(System.String)">
+            <summary>
+            Look if extension is valid.
+            </summary>
+            <param name="extension">Not null, only letters and at least 3 characters.</param>
+            <returns>true if extension is valid, else false</returns>
+        </member>
+        <member name="M:FileParser.FPHelper.IsExtentionValid(System.String,FileParser.Exceptions.FPException@)">
+            <summary>
+            Look if extension is valid.
+            </summary>
+            <param name="extension">Not null, only letters, minimum 3 characters and not more than 5.</param>
+            <param name="ex">return an <see cref="T:FileParser.Exceptions.FPException"/> object that can be thrown.</param>
+            <returns>true if extension is valid, else false</returns>
+        </member>
+        <member name="M:FileParser.FPHelper.SetExtenstionManager(System.String)">
+            <summary>
+            This method can be used to set the extensions for the parser.
+            It returns the extension if everything is ok, otherwise it throw an excetion and notify the observer.
+            </summary>
+            <param name="extension">this string get checked</param>
+            <returns>Returns the <paramref name="extension"/> if it is valid.</returns>
+        </member>
+        <member name="T:FileParser.ISaveLoad">
+            <summary>
+            This interface is used to define a new parser to save and load an object.
+            </summary>
+        </member>
+        <member name="P:FileParser.ISaveLoad.Extension">
+            <summary>
+            This return the extention of this <see cref="T:FileParser.ISaveLoad"/>.
+            </summary>
+        </member>
+        <member name="P:FileParser.ISaveLoad.DefaultExtension">
+            <summary>
+            This return the default extention of this <see cref="T:FileParser.ISaveLoad"/>.
+            </summary>
+        </member>
+        <member name="M:FileParser.ISaveLoad.SetExtention(System.String)">
+            <summary>
+            Change the Extention of this <see cref="T:FileParser.ISaveLoad"/>.
+            </summary>
+            <param name="extention">Only letters are allowed.</param>
+            <exception cref="T:FileParser.Exceptions.FPException"></exception>
+        </member>
+        <member name="M:FileParser.ISaveLoad.Save``1(``0,System.String)">
+            <summary>
+            Save a object at <paramref name="path"/>.
+            </summary>
+            <typeparam name="T">This object type get saved.</typeparam>
+            <param name="value">This object get saved.</param>
+            <param name="path">It get saved here. Must contain directory + filename.</param>
+            <exception cref="T:FileParser.Exceptions.FPParserSaveException"></exception>
+        </member>
+        <member name="M:FileParser.ISaveLoad.Load``1(System.String)">
+            <summary>
+            Load the object from a file.
+            </summary>
+            <typeparam name="T">This object type get loaded.</typeparam>
+            <param name="path">Load data from this file. Must contain directory + filename.</param>
+            <returns>Returns an object of type T</returns>
+            <exception cref="T:FileParser.Exceptions.FPParserLoadException"></exception>
+        </member>
+        <member name="T:FileParser.Parser.FPBinarySaveLoad">
+            <summary>
+            Save or load a binary file that contain an object.
+            </summary>
+        </member>
+        <member name="P:FileParser.Parser.FPBinarySaveLoad.Extension">
+            <summary>
+            This return the extention of this <see cref="T:FileParser.Parser.FPBinarySaveLoad"/>.
+            </summary>
+        </member>
+        <member name="P:FileParser.Parser.FPBinarySaveLoad.DefaultExtension">
+            <summary>
+            This return the default extention of this <see cref="T:FileParser.Parser.FPBinarySaveLoad"/>.
+            </summary>
+        </member>
+        <member name="M:FileParser.Parser.FPBinarySaveLoad.#ctor">
+            <summary>
+            Create a new instace of <see cref="T:FileParser.Parser.FPBinarySaveLoad"/>.
+            </summary>
+        </member>
+        <member name="M:FileParser.Parser.FPBinarySaveLoad.Load``1(System.String)">
+            <summary>
+            Load the object from a file.
+            </summary>
+            <typeparam name="T">This object type get loaded.</typeparam>
+            <param name="path">Load data from this file. Must contain directory + filename.</param>
+            <returns>Returns an object of type T</returns>
+            <exception cref="T:FileParser.Exceptions.FPParserLoadException"></exception>
+        </member>
+        <member name="M:FileParser.Parser.FPBinarySaveLoad.Save``1(``0,System.String)">
+            <summary>
+            Save an object at <paramref name="path"/>.
+            </summary>
+            <typeparam name="T">This object type get saved.</typeparam>
+            <param name="value">This object get saved.</param>
+            <param name="path">It get saved here. Must contain directory + filename.</param>
+            <exception cref="T:FileParser.Exceptions.FPParserSaveException"></exception>
+        </member>
+        <member name="M:FileParser.Parser.FPBinarySaveLoad.SetExtention(System.String)">
+            <summary>
+            Change the Extention of this <see cref="T:FileParser.Parser.FPBinarySaveLoad"/>.
+            </summary>
+            <param name="extension">Only letters are allowed.</param>
+            <exception cref="T:FileParser.Exceptions.FPException"></exception>
+        </member>
+        <member name="T:FileParser.Parser.FPJsonSaveLoad">
+            <summary>
+            Save or load a json file that contain an object.
+            </summary>
+        </member>
+        <member name="P:FileParser.Parser.FPJsonSaveLoad.Extension">
+            <summary>
+            This return the Extention of this <see cref="T:FileParser.Parser.FPJsonSaveLoad"/>.
+            </summary>
+        </member>
+        <member name="P:FileParser.Parser.FPJsonSaveLoad.DefaultExtension">
+            <summary>
+            This return the default extention of this <see cref="T:FileParser.Parser.FPJsonSaveLoad"/>.
+            </summary>
+        </member>
+        <member name="M:FileParser.Parser.FPJsonSaveLoad.#ctor">
+            <summary>
+            Create a new instace of <see cref="T:FileParser.Parser.FPJsonSaveLoad"/>.
+            </summary>
+        </member>
+        <member name="M:FileParser.Parser.FPJsonSaveLoad.Load``1(System.String)">
+            <summary>
+            Load the object from a file.
+            </summary>
+            <typeparam name="T">This object type get loaded.</typeparam>
+            <param name="path">Load data from this file. Must contain directory + filename.</param>
+            <returns>Returns an object of type T</returns>
+            <exception cref="T:FileParser.Exceptions.FPParserLoadException"></exception>
+        </member>
+        <member name="M:FileParser.Parser.FPJsonSaveLoad.Save``1(``0,System.String)">
+            <summary>
+            Save an object at <paramref name="path"/>.
+            </summary>
+            <typeparam name="T">This object type get saved.</typeparam>
+            <param name="value">This object get saved.</param>
+            <param name="path">It get saved here. Must contain directory + filename.</param>
+            <exception cref="T:FileParser.Exceptions.FPParserSaveException"></exception>
+        </member>
+        <member name="M:FileParser.Parser.FPJsonSaveLoad.SetExtention(System.String)">
+            <summary>
+            Change the Extention of this <see cref="T:FileParser.Parser.FPJsonSaveLoad"/>.
+            </summary>
+            <param name="extension">Only letters are allowed.</param>
+            <exception cref="T:FileParser.Exceptions.FPException"></exception>
+        </member>
+        <member name="T:FileParser.Parser.FPTextSaveLoad">
+            <summary>
+            Save or load a text file that contain an string.
+            </summary>
+        </member>
+        <member name="P:FileParser.Parser.FPTextSaveLoad.Extension">
+            <summary>
+            This return the Extention of this <see cref="T:FileParser.Parser.FPTextSaveLoad"/>.
+            </summary>
+        </member>
+        <member name="P:FileParser.Parser.FPTextSaveLoad.DefaultExtension">
+            <summary>
+            This return the default extention of this <see cref="T:FileParser.Parser.FPTextSaveLoad"/>.
+            </summary>
+        </member>
+        <member name="M:FileParser.Parser.FPTextSaveLoad.#ctor">
+            <summary>
+            Create a new instace of <see cref="T:FileParser.Parser.FPTextSaveLoad"/>.
+            </summary>
+        </member>
+        <member name="M:FileParser.Parser.FPTextSaveLoad.Save``1(``0,System.String)">
+            <summary>
+            Save a object at <paramref name="path"/>.
+            </summary>
+            <typeparam name="T">This object type get saved.</typeparam>
+            <param name="value">This object get saved.</param>
+            <param name="path">It get saved here. Must contain directory + filename.</param>
+            <exception cref="T:FileParser.Exceptions.FPParserSaveException"></exception>
+        </member>
+        <member name="M:FileParser.Parser.FPTextSaveLoad.Load``1(System.String)">
+            <summary>
+            Load the object from a file.
+            </summary>
+            <typeparam name="T">This object type get loaded.</typeparam>
+            <param name="path">Load data from this file. Must contain directory + filename.</param>
+            <returns>Returns an object of type T</returns>
+            <exception cref="T:FileParser.Exceptions.FPParserLoadException"></exception>
+        </member>
+        <member name="M:FileParser.Parser.FPTextSaveLoad.LoadRows(System.String,System.String[]@)">
+            <summary>
+            Load all text rows from a file.
+            </summary>
+            <param name="path">Load data from this file. Must contain directory + filename.</param>
+            <param name="rows">The loaded rows or null if it didnt work.</param>
+            <returns>True if it worked, false if not.</returns>
+        </member>
+        <member name="M:FileParser.Parser.FPTextSaveLoad.Save(System.String,System.String)">
+            <summary>
+            Save a string at <paramref name="path"/>.
+            </summary>
+            <param name="text">This text get saved.</param>
+            <param name="path">It get saved here. Must contain directory + filename.</param>
+            <returns>True if it worked, false if not.</returns>
+        </member>
+        <member name="M:FileParser.Parser.FPTextSaveLoad.SetExtention(System.String)">
+            <summary>
+            Change the Extention of this <see cref="T:FileParser.Parser.FPTextSaveLoad"/>.
+            </summary>
+            <param name="extension">Only letters are allowed.</param>
+            <exception cref="T:FileParser.Exceptions.FPException"></exception>
+        </member>
+        <member name="T:FileParser.Parser.FPXmlSaveLoad">
+            <summary>
+            Save or load a xml file that contain an object.
+            </summary>
+        </member>
+        <member name="P:FileParser.Parser.FPXmlSaveLoad.Extension">
+            <summary>
+            This return the Extention of this <see cref="T:FileParser.Parser.FPXmlSaveLoad"/>.
+            </summary>
+        </member>
+        <member name="P:FileParser.Parser.FPXmlSaveLoad.DefaultExtension">
+            <summary>
+            This return the default extention of this <see cref="T:FileParser.Parser.FPXmlSaveLoad"/>.
+            </summary>
+        </member>
+        <member name="M:FileParser.Parser.FPXmlSaveLoad.#ctor">
+            <summary>
+            Create a new instace of <see cref="T:FileParser.Parser.FPXmlSaveLoad"/>.
+            </summary>
+        </member>
+        <member name="M:FileParser.Parser.FPXmlSaveLoad.Load``1(System.String)">
+            <summary>
+            Load the object from a file.
+            </summary>
+            <typeparam name="T">This object type get loaded.</typeparam>
+            <param name="path">Load data from this file. Must contain directory + filename.</param>
+            <returns>Returns an object of type T</returns>
+            <exception cref="T:FileParser.Exceptions.FPParserLoadException"></exception>
+        </member>
+        <member name="M:FileParser.Parser.FPXmlSaveLoad.Save``1(``0,System.String)">
+            <summary>
+            Save an object at <paramref name="path"/>.
+            </summary>
+            <typeparam name="T">This object type get saved.</typeparam>
+            <param name="value">This object get saved.</param>
+            <param name="path">It get saved here. Must contain directory + filename.</param>
+            <exception cref="T:FileParser.Exceptions.FPParserSaveException"></exception>
+        </member>
+        <member name="M:FileParser.Parser.FPXmlSaveLoad.SetExtention(System.String)">
+            <summary>
+            Change the Extention of this <see cref="T:FileParser.Parser.FPXmlSaveLoad"/>.
+            </summary>
+            <param name="extension">Only letters are allowed.</param>
+            <exception cref="T:FileParser.Exceptions.FPException"></exception>
+        </member>
+        <member name="T:FileParser.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.ErrorHelperLengthLong">
+            <summary>
+              Looks up a localized string similar to The extension is too long (more than {0} characters)..
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.ErrorHelperLengthShort">
+            <summary>
+              Looks up a localized string similar to The extension is not long enough (less than {0} characters)..
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.ErrorHelperLetter">
+            <summary>
+              Looks up a localized string similar to The extension contain non letter characters..
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.ErrorHelperNull">
+            <summary>
+              Looks up a localized string similar to The extension can not be null..
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.ErrorLoadNoAllowedIO">
+            <summary>
+              Looks up a localized string similar to The extension does not exist, so it can&apos;t be loaded.
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.ErrorManagerLoad">
+            <summary>
+              Looks up a localized string similar to An exception was thrown in the FPDataManager load method with the path &apos;{0}&apos; and extension &apos;{1}&apos;. See innerException for more information.
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.ErrorManagerSave">
+            <summary>
+              Looks up a localized string similar to An exception was thrown in the FPDataManager save method with the path &apos;{0}&apos; and extension &apos;{1}&apos;. See innerException for more information.
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.ErrorParser">
+            <summary>
+              Looks up a localized string similar to An exception was thrown in the {0} method of the {1} parser. You can find more information in the innerException property. .
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.ErrorSaveNoAllowedIO">
+            <summary>
+              Looks up a localized string similar to The extension does not exist, so it can&apos;t be saved.
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.exceptionMoreInformation">
+            <summary>
+              Looks up a localized string similar to There are also additional information in the Exception.Data property..
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.helperPathLenght">
+            <summary>
+              Looks up a localized string similar to The path is longer than {0} charecters. path=&apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.methodLoadName">
+            <summary>
+              Looks up a localized string similar to load.
+            </summary>
+        </member>
+        <member name="P:FileParser.Properties.Resources.methodReadName">
+            <summary>
+              Looks up a localized string similar to read.
+            </summary>
+        </member>
+    </members>
+</doc>
