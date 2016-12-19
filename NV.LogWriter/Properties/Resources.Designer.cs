@@ -203,5 +203,23 @@ namespace LogWriter.Properties {
                 return ResourceManager.GetString("SLWriterID", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The writer is not ready to use or it is disabled.
+        /// </summary>
+        internal static string testWriterExceptionNotReady {
+            get {
+                return ResourceManager.GetString("testWriterExceptionNotReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The writer that should be tested is null..
+        /// </summary>
+        internal static string testWriterExceptionNull {
+            get {
+                return ResourceManager.GetString("testWriterExceptionNull", resourceCulture);
+            }
+        }
     }
 }

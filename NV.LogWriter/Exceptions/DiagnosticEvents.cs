@@ -21,5 +21,8 @@ namespace LogWriter.Exceptions
 
 
         public const int ErrorEventViewWriter = Base + 20;
+
+        public const int ErrorHelpTestWriterNull = Base + 30;
+        public const int ErrorHelpTestWriterNotReade = Base + 31;
     }
 }

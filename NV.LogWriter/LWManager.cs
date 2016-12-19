@@ -296,22 +296,23 @@ namespace LogWriter
 
 
                     try
-                {
-                    if (eventView && EventViewWriter.LogIsReadyToUse(log))
-                        EventViewWriter.WriteLog(log);
+                    {
+                        if (eventView && EventViewWriter.LogIsReadyToUse(log))
+                            EventViewWriter.WriteLog(log);
 
-                    if (logFile && LogFileWriter.LogIsReadyToUse(log))
-                        LogFileWriter.WriteLog(log);
+                        if (logFile && LogFileWriter.LogIsReadyToUse(log))
+                            LogFileWriter.WriteLog(log);
 
-                }
-            }
-            catch (LWException lwEx)
-            {
-                throw lwEx;
-            }
-            catch (Exception ex)
-            {
-                throw new LWLogManagerException(Resources.ErrorUnexpectedManagerException + ex.Message, DiagnosticEvents.LWManagerError);
+                    }
+
+                    catch (LWException lwEx)
+                    {
+                        throw lwEx;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new LWLogManagerException(Resources.ErrorUnexpectedManagerException + ex.Message, DiagnosticEvents.LWManagerError);
+                    }
             }
             return true;
         }

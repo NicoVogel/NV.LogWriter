@@ -181,4 +181,10 @@
     <value>The error message is empty. The simple log manager can not log a empty message.</value>
     <comment>exception</comment>
   </data>
+  <data name="testWriterExceptionNotReady" xml:space="preserve">
+    <value>The writer is not ready to use or it is disabled</value>
+  </data>
+  <data name="testWriterExceptionNull" xml:space="preserve">
+    <value>The writer that should be tested is null.</value>
+  </data>
 </root>

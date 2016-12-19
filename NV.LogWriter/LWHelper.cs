@@ -22,9 +22,9 @@ namespace LogWriter
         public static bool TestILWLogWriter(ILWLogWriter writer)
         {
             if (writer == null)
-                throw new ArgumentNullException(nameof(writer), Resources.testWriterExceptionNull);
+                throw new LWLogWriterException(Resources.testWriterExceptionNull, DiagnosticEvents.ErrorHelpTestWriterNull);
             if (writer.Enabled && !writer.IsReadyToUse())
-                throw new LWWriterNotReadyException(nameof(writer), Resources.testWriterExceptionNotReady);
+                throw new LWLogWriterException(Resources.testWriterExceptionNotReady, DiagnosticEvents.ErrorHelpTestWriterNotReade);
 
             return true;
         }
